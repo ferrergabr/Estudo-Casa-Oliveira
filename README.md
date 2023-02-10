@@ -49,3 +49,97 @@ Setor financeiro
 ### Modelo Logico 
 
 !["Diagrama do modelo logico"](./Modelo_logico_Estoque.png)
+
+
+---
+### Modelo físico
+
+Código e documentação do modelo físico 
+
+/*
+Para o projeto de banco de dados da Casa Oliveira será criado 
+uma estrutura física com os comandos SQL(Structure Query Language)
+Iremos começar com o comando de criação de banco de dados. Este
+comando pertence a categoria de comandos DDL(Data Definition Language)
+Comando:
+   CREATE DATABASE nome_do_banco -> CREATE DATABASE casaoliveira 
+*/
+
+CREATE DATABASE casaoliveira; 
+/*
+Após a criação do banco de dados, é necessário seleciona-los. Para isso 
+iremos usar o comando USE nome_do_banco
+*/
+USE casaoliveira; 
+
+/*
+Criação das entidades em modo físico usando os comandos SQL.
+Para criar uma tabela(entidade) usaremos o comando 
+CREATE TABLE nome_da_tabela seguido por parenteses e os
+atributos(campos) da tabela, bem como a sua tipificação, ou seja, 
+devemos dizer qual o tipo de dados de cada campo(atributo) da 
+tabela deve recebe. Ex.: o campo idade deve receber valores
+númericos e, portanto será definido como int(inteiro). 
+
+Vamos criar a tabela de produtos. Esta tabela possui os seguintes campos:
+- idproduto, descrição, fornecedor, validade, lote, preco, nome, marca, categoria 
+
+```
+Para cada será definido um tipo de dado
+para o idproduto: iremos definir como: 
+   -Chave-Primária (Primary Key) é nosso campo indexador, por ele será 
+   realizado o relacionamento com outras tabelas;
+   -Vamos definir este campo auto_incremente, o que permite gerar os ids de forma automática.
+   Esse passo é importante, pois elimina alguns problemas,
+   tais como: Concorrência, geração incrementada de valores e exclusividade
+   de valores;
+   -Vamos definir o campo o tipo de dado numérico int(inteiro)
+  ``` 
+  ```
+Para o campo descrição, usaremos o tipo de dado Text. Com este tipo podemos inserir
+ate 64 mil caracteres. Como neste campo pode haver a possibilidade de uma descrição 
+longa do produto, se faz necessário um tamanho maior. 
+```
+```
+Para o campo fornecedor iremos usar o tipo de dado VARCHAR. Este tipo de dado nos permite
+inserir textos, mas com um limite que pode ser predefenido pelo usuário ou podemos 
+utilizar o limite total de 255 caractres, para o fornecedor usaremos 50 caracteres. 
+```
+```
+Para o campo validade iremos usar o tipo de dado DATE.
+
+Para o campo lote, sera definido o tipo de dado VARCHAR, pois há a possibilidade 
+do valor conter caracteres alfa decimais, sendo assim o VARCHAR é uma ótima opção por aceitar 
+valores diversos. 
+```
+O campo preço será definido como DECIMAL. Com esse tipo é possível inserir valores númericos
+com a aplicação de casas decimais. Você define o comprimento e deste tamanho é configurado as
+casas decimais. Ex.: DECIMAL(10,2) -> COMPRIMENTO DE 10 DIGITOS E DESTES TEMOS 2 CASAS DECIMAIS, 
+VEJA: R$ 111111,11 -> 11.111.111,11 -> R$ 35.665.253,23
+```
+```
+Para os campos nome, marca e categoria será definido o tipo de dado VARCHAR, pois este tipo
+é capaz de receber caracteres de texto. Precisaremos apenas definir o tamanho de cada campo.
+Ex.: nome pode ficar com o tamnho 50, marca pode ficar com 30 ecategoria 20
+*/
+``` 
+CREATE TABLE produto(
+idproduto int auto_increment primary key,
+descricao text, 
+fornecedor varchar(50),
+validade date,
+lote varchar(20),
+preco decimal(8,2),
+nome varchar(50),
+marca varchar(30),
+categoria varchar(20) 
+);
+CREATE TABLE estoque(
+idestoque int auto_increment primary key,
+idproduto int,
+quantidade_maxima int,
+quantidade_minima int,
+quantidade_atual int,
+ultima_movimentacao date,
+quantidade_lote int);
+``` 
