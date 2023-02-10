@@ -43,4 +43,9 @@ Setor financeiro
 
 ### Modelo conceitual
 
-!['diagrama do modelo conceitual'] (./)
+!['diagrama do modelo conceitual'](./Modelo_conceitual.PNG)
+
+
+### Modelo Logico 
+
+!["Diagrama do modelo logico"](./Modelo_logico_Estoque.png)
